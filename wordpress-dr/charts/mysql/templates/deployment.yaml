@@ -3,29 +3,29 @@ kind: Deployment
 metadata:
   name: wordpress-mysql-dr
   labels:
-    app: wordpress
+    app: wordpress-dr
 spec:
   selector:
     matchLabels:
-      app: wordpress
-      tier: mysql
+      app: wordpress-dr
+      tier: mysql-dr
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: wordpress
-        tier: mysql
+        app: wordpress-dr
+        tier: mysql-dr
     spec:
       containers:
       - image: mysql:5.6
-        name: mysql
+        name: mysql-dr
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: Password123!
         ports:
         - containerPort: 3306
-          name: mysql
+          name: mysql-dr
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
