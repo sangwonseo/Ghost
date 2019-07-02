@@ -3,23 +3,23 @@ kind: Deployment
 metadata:
   name: wordpress-dr
   labels:
-    app: wordpress
+    app: wordpress-dr
 spec:
   selector:
     matchLabels:
-      app: wordpress
-      tier: frontend
+      app: wordpress-dr
+      tier: frontend-dr
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: wordpress
-        tier: frontend
+        app: wordpress-dr
+        tier: frontend-dr
     spec:
       containers:
       - image: wordpress:4.8-apache
-        name: wordpress
+        name: wordpress-dr
         env:
         - name: WORDPRESS_DB_HOST
           value: wordpress-mysql
@@ -27,7 +27,7 @@ spec:
           value: Password123!
         ports:
         - containerPort: 80
-          name: wordpress
+          name: wordpress-dr
         volumeMounts:
         - name: wordpress-persistent-storage
           mountPath: /var/www/html
