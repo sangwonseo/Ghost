@@ -1,14 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: wordpress
-  labels:
-    app: wordpress
+  name: blog
 spec:
-  ports:
-    - port: 80
-      nodePort: 30001
+  type: LoadBalancer
   selector:
-    app: wordpress
-    tier: frontend
-  type: NodePort
+    app: blog
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 2368
